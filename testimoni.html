@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produk Buku</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<header class="hero">
+
+  <div class="overlay">
+    <div class="logo">🌸 Toko Buku Maryamasshiddiqoh 🌸</div>
+
+    <nav class="navbar">
+      <a href="index.html">Beranda</a>
+      <a href="Produk.html">Produk</a>
+      <a href="Bedah-buku.html">Bedah Buku</a>
+      <a href="Testimoni.html">Testimoni</a>
+      <a href="tampil-testimoni.html">Daftar Testimoni</a>
+    </nav>
+
+    <h1>Toko Buku Maryamasshiddiqoh</h1>
+    
+  </div>
+
+</header>
+
+
+<main class="formulir">
+  <h2>Berikan Testimoni Anda</h2>
+
+  <form id="formtestimoni">
+
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="nama" required
+      placeholder="Nama lengkap">
+
+    <label for="asal">Asal Sekolah/Instansi/Komunitas:</label>
+    <input type="text" id="asal" name="asal" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required
+      placeholder="email@example.com">
+
+    <label for="judul">Judul buku yang dibeli:</label>
+    <input type="text" id="judul" name="judul" required>
+
+    <label for="rating">Rating Buku (1–5):</label>               
+    <input type="number" id="rating" name="rating"
+      min="1" max="5" required>
+
+    <label for="pesan">Testimoni Anda:</label>
+    <textarea
+      id="pesan"
+      name="pesan"
+      required
+      placeholder="Tulis Pengalaman Anda..."
+      rows="5"></textarea>
+
+    <button type="submit">Kirim Testimoni</button>
+
+  </form>
+</main>
+<footer> 
+    <p>&copy; 2025 Toko Buku Maryamasshiddiqoh </p>
+  </footer>  
+  <script>
+const form = document.getElementById("formtestimoni");
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const testimoniBaru = {
+        nama: document.getElementById("nama").value,
+        asal: document.getElementById("asal").value,
+        email: document.getElementById("email").value,
+        judul: document.getElementById("judul").value,
+        rating: document.getElementById("rating").value,
+        pesan: document.getElementById("pesan").value
+    };
+
+    let testimoniList = JSON.parse(localStorage.getItem("testimoniList")) || [];
+
+    testimoniList.push(testimoniBaru);
+    
+    localStorage.setItem("testimoniList", JSON.stringify(testimoniList));
+    
+    alert("Testimoni berhasil dikirim!");
+   
+   window.location.href = "proses-testimoni.html";
+
+});
+</script>
+</body>
+</html>

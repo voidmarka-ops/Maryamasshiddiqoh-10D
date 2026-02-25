@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar Testimoni</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<header class="hero">
+
+  <div class="overlay">
+    <div class="logo">🌸 Toko Buku Maryamasshiddiqoh 🌸</div>
+
+    <nav class="navbar">
+      <a href="index.html">Beranda</a>
+      <a href="Produk.html">Produk</a>
+      <a href="Bedah-buku.html">Bedah Buku</a>
+      <a href="Testimoni.html">Testimoni</a>
+      <a href="tampil-testimoni.html">Daftar Testimoni</a>
+    </nav>
+
+    <h1>Toko Buku Maryamasshiddiqoh</h1>
+    
+  </div>
+
+</header>
+
+<main class="formulir">
+    <h2>Testimoni-testimoni pembeli :</h2>
+
+    <div id="daftarTestimoni"></div>
+
+    <button id="hapusSemua">Hapus Semua Testimoni</button>
+</main>
+
+
+<footer> 
+    <p>&copy; 2025 Toko Buku Maryamasshiddiqoh</p>
+</footer> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const container = document.getElementById("daftarTestimoni");
+    let testimoniList = JSON.parse(localStorage.getItem("testimoniList")) || [];
+
+    function tampilkanTestimoni() {
+        container.innerHTML = "";
+
+        if (testimoniList.length === 0) {
+            container.innerHTML = "<p>Belum ada testimoni.</p>";
+            return;
+        }
+
+        testimoniList.forEach((t, i) => {
+            const el = document.createElement("div");
+            el.className = "testimoni-box";
+
+            el.innerHTML = `
+                <p><strong>Nama:</strong> ${t.nama}</p>
+                <p><strong>Asal:</strong> ${t.asal}</p>
+                <p><strong>Email:</strong> ${t.email}</p>
+                <p><strong>Judul:</strong> ${t.judul}</p>
+                <p><strong>Rating:</strong> ${t.rating}</p>
+                <p><strong>Pesan:</strong> ${t.pesan}</p>
+                <button onclick="hapusTestimoni(${i})">Hapus</button>
+                <hr>
+            `;
+
+            container.appendChild(el);
+        });
+    }
+
+    window.hapusTestimoni = function(index) {
+        testimoniList.splice(index, 1);
+        localStorage.setItem("testimoniList", JSON.stringify(testimoniList));
+        tampilkanTestimoni();
+    }
+
+    const tombolHapusSemua = document.getElementById("hapusSemua");
+
+    tombolHapusSemua.addEventListener("click", function() {
+        const konfirmasi = confirm("Apakah Anda yakin ingin menghapus semua testimoni?");
+        if (konfirmasi) {
+            localStorage.removeItem("testimoniList");
+            testimoniList = [];
+            tampilkanTestimoni();
+        }
+    });
+
+    tampilkanTestimoni();
+});
+</script>
+
+</body>
+</html>

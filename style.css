@@ -66,7 +66,15 @@ footer {
     width: 100%;
 }
 
+.overlay{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.navbar{
+    display: flex;
+}
 
 h1 {
     color: #001F3D;
@@ -315,3 +323,4 @@ form label {
     background-color: #4B3CA7;
 
 }
+

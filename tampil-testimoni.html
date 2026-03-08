@@ -1,105 +1,125 @@
+
+  
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daftar Testimoni</title>
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="hero">
 
-  <div class="overlay">
-    <div class="logo">🌸 Toko Buku Maryamasshiddiqoh 🌸</div>
+<div class="overlay">
 
-    <nav class="navbar">
-      <a href="index.html">Beranda</a>
-      <a href="produk.html">Produk</a>
-      <a href="bedah-buku.html">Bedah Buku</a>
-      <a href="testimoni.html">Testimoni</a>
-      <a href="tampil-testimoni.html">Daftar Testimoni</a>
-       <a href="kontak.html">Kontak</a>
-       <a href="event.html">Event</a>
-    </nav>
+<div class="logo">🌸 Toko Buku Maryamasshiddiqoh 🌸</div>
 
-    <h1>Toko Buku Maryamasshiddiqoh</h1>
-    
-  </div>
+<nav class="navbar">
+<a href="index.html">Beranda</a>
+<a href="produk.html">Produk</a>
+<a href="bedah-buku.html">Bedah Buku</a>
+<a href="testimoni.html">Testimoni</a>
+<a href="tampil-testimoni.html">Daftar Testimoni</a>
+<a href="kontak.html">Kontak</a>
+<a href="event.html">Event</a>
+</nav>
+
+<h1>Toko Buku Maryamasshiddiqoh</h1>
+
+</div>
 
 </header>
-<section></section>
+
+
 <main class="formulir">
-    <h2>Testimoni-testimoni pembeli :</h2>
 
-    <div id="daftarTestimoni"></div>
+<h2>Testimoni-testimoni pembeli :</h2>
 
-    <button id="hapusSemua">Hapus Semua Testimoni</button>
-</main></section>
+<div id="daftarTestimoni"></div>
+
+<button id="hapusSemua">Hapus Semua Testimoni</button>
+
+</main>
 
 
-<footer> 
-    <p>&copy; 2026 Toko Buku Maryamasshiddiqoh</p>
-</footer> 
+<footer>
+<p>&copy; 2026 Toko Buku Maryamasshiddiqoh</p>
+</footer>
+
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
 
-    const container = document.getElementById("daftarTestimoni");
-    let testimoniList = JSON.parse(localStorage.getItem("testimoniList")) || [];
+document.addEventListener("DOMContentLoaded", function(){
 
-    function tampilkanTestimoni() {
-        container.innerHTML = "";
+const container = document.getElementById("daftarTestimoni");
 
-        if (testimoniList.length === 0) {
-            container.innerHTML = "<p>Belum ada testimoni.</p>";
-            return;
-        }
+let testimoniList = JSON.parse(localStorage.getItem("testimoniList")) || [];
 
-        testimoniList.forEach((t, i) => {
-            const el = document.createElement("div");
-            el.className = "testimoni-box";
+function tampilkanTestimoni(){
 
-            el.innerHTML = `
-                <p><strong>Nama:</strong> ${t.nama}</p>
-                <p><strong>Asal:</strong> ${t.asal}</p>
-                <p><strong>Email:</strong> ${t.email}</p>
-                <p><strong>Judul:</strong> ${t.judul}</p>
-                <p><strong>Rating:</strong> ${t.rating}</p>
-                <p><strong>Pesan:</strong> ${t.pesan}</p>
-                <button onclick="hapusTestimoni(${i})">Hapus</button>
-                <hr>
-            `;
+container.innerHTML = "";
 
-            container.appendChild(el);
-        });
-    }
+if(testimoniList.length === 0){
 
-    window.hapusTestimoni = function(index) {
-        testimoniList.splice(index, 1);
-        localStorage.setItem("testimoniList", JSON.stringify(testimoniList));
-        tampilkanTestimoni();
-    }
+container.innerHTML = "<p>Belum ada testimoni.</p>";
 
-    const tombolHapusSemua = document.getElementById("hapusSemua");
+return;
 
-    tombolHapusSemua.addEventListener("click", function() {
-        const konfirmasi = confirm("Apakah Anda yakin ingin menghapus semua testimoni?");
-        if (konfirmasi) {
-            localStorage.removeItem("testimoniList");
-            testimoniList = [];
-            tampilkanTestimoni();
-        }
-    });
+}
 
-    tampilkanTestimoni();
+testimoniList.forEach(function(t){
+
+const el = document.createElement("div");
+
+el.className = "testimoni-box";
+
+el.innerHTML = `
+<p><strong>Nama:</strong> ${t.nama}</p>
+<p><strong>Asal:</strong> ${t.asal}</p>
+<p><strong>Email:</strong> ${t.email}</p>
+<p><strong>Judul:</strong> ${t.judul}</p>
+<p><strong>Rating:</strong> ${t.rating}</p>
+<p><strong>Pesan:</strong> ${t.pesan}</p>
+`;
+
+container.appendChild(el);
+
 });
+
+}
+
+
+const tombolHapusSemua = document.getElementById("hapusSemua");
+
+tombolHapusSemua.addEventListener("click", function(){
+
+const konfirmasi = confirm("Apakah Anda yakin ingin menghapus semua testimoni?");
+
+if(konfirmasi){
+
+localStorage.removeItem("testimoniList");
+
+testimoniList = [];
+
+tampilkanTestimoni();
+
+}
+
+});
+
+tampilkanTestimoni();
+
+});
+
 </script>
 
 </body>
 </html>
 
+   
 
 
 
